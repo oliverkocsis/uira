@@ -1,26 +1,25 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Admin, Resource } from 'react-admin';
+import { FirebaseDataProvider } from 'react-admin-firebase';
+import { EmployeeList, EmployeeEdit, EmployeeCreate } from './resources/employees';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const config = {
+  apiKey: "AIzaSyBXAUqze595xy-waOLnGW-VzxKJEYnZQfc",
+  authDomain: "uira-app.firebaseapp.com",
+  databaseURL: "https://uira-app.firebaseio.com",
+  projectId: "uira-app",
+  storageBucket: "uira-app.appspot.com",
+  messagingSenderId: "19225788389",
+  appId: "1:19225788389:web:a212ff946e1c1507aa790c",
+  measurementId: "G-R2J39G0X2B"
+};
+const options = {}
+const dataProvider = FirebaseDataProvider(config, options);
+
+const App = () => (
+  <Admin dataProvider={dataProvider} >
+    <Resource name="employees" list={EmployeeList} edit={EmployeeEdit} create={EmployeeCreate} />
+  </Admin>
+);
 
 export default App;
